@@ -224,19 +224,21 @@ const bgm=document.getElementById("bgm");
 let opened=false;
 
 document.getElementById("envelopeWrap").onclick=function(){
+
   if(opened) return;
   opened=true;
+
+  // 🎵 立刻播放（在用户点击事件中）
+  bgm.volume=0.6;
+  bgm.play().catch(()=>{});
 
   envelope.classList.add("state-flap");
   setTimeout(()=>envelope.classList.add("state-pull"),600);
   setTimeout(()=>envelope.classList.add("state-unfold"),1400);
   setTimeout(()=>{
     card.classList.add("show");
-    bgm.volume=0.6;
-    bgm.play().catch(()=>{});
   },2000);
 };
-
 // 音乐按钮
 document.getElementById("musicBtn").onclick=function(){
   if(bgm.paused){
@@ -252,3 +254,4 @@ document.getElementById("musicBtn").onclick=function(){
 </script>
 </body>
 </html>
+
