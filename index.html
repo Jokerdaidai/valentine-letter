@@ -6,6 +6,9 @@
   <title>静，给你的一封信</title>
   <meta name="description" content="情人节情书（成熟温柔版）" />
 
+  <!-- Optional: more handwritten feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg1:#0f1020;
@@ -323,22 +326,37 @@
       width:100%;
     }
 
-    .photo-frame{
-      width:92px;
-      height:92px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(0,0,0,.10);
-      overflow:hidden;
+    /* ===== Polaroid Style (replaces photo-frame) ===== */
+    .polaroid{
+      width:112px;
+      background:#fff;
+      padding:9px 9px 24px; /* bottom space like polaroid */
+      border-radius:4px;
+      box-shadow: 0 12px 28px rgba(0,0,0,.35);
+      transform: rotate(-6deg);
+      transition: transform .3s ease;
       flex:0 0 auto;
-      box-shadow: 0 14px 30px rgba(0,0,0,.25);
     }
-    .photo-frame img{
+    .polaroid:hover{
+      transform: rotate(-3deg) scale(1.03);
+    }
+    .polaroid img{
       width:100%;
-      height:100%;
+      height:92px;
       object-fit:cover;
-      transform: scale(1.05);
+      display:block;
+      border-radius:2px;
       filter: saturate(1.05);
+    }
+    .polaroid-caption{
+      margin-top:7px;
+      text-align:center;
+      color:#222;
+      letter-spacing:1px;
+      font-family: 'Caveat', "Comic Sans MS", "Brush Script MT", cursive;
+      font-size:16px;
+      line-height:1;
+      user-select:none;
     }
 
     main{
@@ -513,8 +531,10 @@
       <!-- Letter Card -->
       <article class="card" id="card" role="article" aria-label="情人节情书">
         <header>
-          <div class="photo-frame" title="我们的照片">
+          <!-- Polaroid photo -->
+          <div class="polaroid" title="我们的照片">
             <img src="photo.jpg" alt="photo" />
+            <div class="polaroid-caption" id="photoDate"></div>
           </div>
 
           <div class="kicker"><span class="dot"></span> Valentine’s Day Letter</div>
@@ -588,6 +608,16 @@
       const hh = pad(now.getHours());
       const mm = pad(now.getMinutes());
       document.getElementById('signedDate').textContent = `${y}-${m}-${d}  ${hh}:${mm}`;
+    })();
+
+    // ===== Photo polaroid handwritten date =====
+    (function setPhotoDate(){
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = now.getMonth() + 1;
+      const d = now.getDate();
+      const el = document.getElementById('photoDate');
+      if (el) el.textContent = `${y}.${m}.${d}`;
     })();
 
     // ===== Hearts =====
