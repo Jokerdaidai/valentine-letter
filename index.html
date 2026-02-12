@@ -100,6 +100,7 @@
       user-select:none;
       cursor:pointer;
       perspective: 1200px;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .envelope{
@@ -155,6 +156,7 @@
     .fold-left, .fold-right, .fold-bottom{
       position:absolute; inset:0;
       z-index:2;
+      pointer-events:none;
     }
     .fold-left:before{
       content:"";
@@ -195,6 +197,7 @@
       z-index:5;
       transform: translateY(14px);
       transition: transform 900ms cubic-bezier(.2,.9,.2,1), opacity 500ms ease;
+      pointer-events:none;
     }
     .seal span{
       font-weight:800;
@@ -218,6 +221,7 @@
       transition: transform 1000ms cubic-bezier(.2,.95,.2,1), opacity 600ms ease;
       z-index:3;
       overflow:hidden;
+      pointer-events:none;
     }
     .paper:before{
       content:"";
@@ -326,11 +330,11 @@
       width:100%;
     }
 
-    /* ===== Polaroid Style (replaces photo-frame) ===== */
+    /* ===== Polaroid Style ===== */
     .polaroid{
       width:112px;
       background:#fff;
-      padding:9px 9px 24px; /* bottom space like polaroid */
+      padding:9px 9px 24px;
       border-radius:4px;
       box-shadow: 0 12px 28px rgba(0,0,0,.35);
       transform: rotate(-6deg);
@@ -442,15 +446,6 @@
     }
     .audio-pill b{ color:rgba(246,242,255,.92); font-weight:750; }
 
-    footer{
-      position:relative;
-      z-index:1;
-      padding:0 34px 26px;
-      color:rgba(216,207,255,.7);
-      font-size:12px;
-      line-height:1.6;
-    }
-
     /* hearts */
     .hearts{
       position:fixed;
@@ -490,8 +485,8 @@
 
     @media print{
       body{ background:#fff; color:#111; }
-      body:before, .hearts, .photo-bg, .photo-vignette, .actions, footer, .scene{ display:none !important; }
-      .card{ box-shadow:none; border:1px solid #ddd; background:#fff; }
+      body:before, .hearts, .photo-bg, .photo-vignette, .actions, .scene, .hint{ display:none !important; }
+      .card{ box-shadow:none; border:1px solid #ddd; background:#fff; opacity:1 !important; transform:none !important; }
       .letter{ background:#fff; border:1px solid #eee; }
       .letter p, .subtitle, .signature, h1{ color:#111 !important; }
     }
@@ -529,9 +524,8 @@
       </div>
 
       <!-- Letter Card -->
-      <article class="card" id="card" role="article" aria-label="情人节情书">
+      <article class="card" id="card" role="article" aria-label="情书">
         <header>
-          <!-- Polaroid photo -->
           <div class="polaroid" title="照片">
             <img src="photo.jpg" alt="photo" />
             <div class="polaroid-caption" id="photoDate"></div>
@@ -539,193 +533,191 @@
 
           <div class="kicker"><span class="dot"></span> Valentine’s Day Letter</div>
           <h1>给静的一封信</h1>
-          <p class="subtitle">情人节快乐。希望你打开这一页时，像被温柔地抱了一下。</p>
+          <p class="subtitle">希望你打开这一页时，像被温柔地抱了一下。</p>
         </header>
 
         <main>
-<section class="letter" id="letter">
+          <section class="letter" id="letter">
+            <p>静，</p>
+            <p>见信如晤。<br/>
+            这是我第一次，为一个人写这样一封长信。</p>
 
-  <p>静，</p>
-  <p>见信如晤。<br/>
-  这是我第一次，为一个人写这样一封长信。</p>
+            <p>思绪万千，却又不知从何落笔。<br/>
+            想从我们的细节开始叙述，却总忍不住走神。</p>
 
-  <p>思绪万千，却又不知从何落笔。<br/>
-  想从我们的细节开始叙述，却总忍不住走神。</p>
+            <p>情话没有想出多少句，可我实实在在地，想了你好久、好久。<br/>
+            请先原谅我拙劣的文笔。</p>
 
-  <p>情话没有想出多少句，可我实实在在地，想了你好久、好久。<br/>
-  请先原谅我拙劣的文笔。</p>
+            <p>接下来，我想用我最真诚的心，去做一件我从未认真做过的事情。</p>
 
-  <p>接下来，我想用我最真诚的心，去做一件我从未认真做过的事情。</p>
+            <p>回想起第一次与你相约、相见、相识，又相别。<br/>
+            那一连串的感觉至今仍历历在目。<br/>
+            从满怀期待，到怦然心动；<br/>
+            从满心欢喜，到离别时那一点点惆怅。<br/>
+            那天坐在归家的车上，坐在飞往东京的飞机上，<br/>
+            满心是你，满眼也是你。<br/>
+            东京的雪像你，<br/>
+            包上的拉布布也像你。<br/>
+            情不知所起，一往而情深。<br/>
+            谢谢你，让我在那一天，见到你。</p>
 
-  <p>回想起第一次与你相约、相见、相识，又相别。<br/>
-  那一连串的感觉至今仍历历在目。<br/>
-  从满怀期待，到怦然心动；<br/>
-  从满心欢喜，到离别时那一点点惆怅。<br/>
-  那天坐在归家的车上，坐在飞往东京的飞机上，<br/>
-  满心是你，满眼也是你。<br/>
-  东京的雪像你，<br/>
-  包上的拉布布也像你。<br/>
-  情不知所起，一往而情深。<br/>
-  谢谢你，让我在那一天，见到你。</p>
+            <p>后来，我怀着忐忑的心，想再靠近一点。<br/>
+            笨拙的我不知道你喜欢什么样的温度，<br/>
+            只好小心翼翼地挪着脚步，一步一步向你走去。<br/>
+            也许是坚持，也许是真诚，<br/>
+            也许只是缘分刚刚好。<br/>
+            终于，你看到了我。<br/>
+            你向我走过来的那一刻，我不知道该如何形容。<br/>
+            那感觉像塔檐下的风铃，被风轻轻唤醒——<br/>
+            叮咛叮咛，<br/>
+            此起彼落，<br/>
+            每一声，都在敲着你的名字。</p>
 
-  <p>后来，我怀着忐忑的心，想再靠近一点。<br/>
-  笨拙的我不知道你喜欢什么样的温度，<br/>
-  只好小心翼翼地挪着脚步，一步一步向你走去。<br/>
-  也许是坚持，也许是真诚，<br/>
-  也许只是缘分刚刚好。<br/>
-  终于，你看到了我。<br/>
-  你向我走过来的那一刻，我不知道该如何形容。<br/>
-  那感觉像塔檐下的风铃，被风轻轻唤醒——<br/>
-  叮咛叮咛，<br/>
-  此起彼落，<br/>
-  每一声，都在敲着你的名字。</p>
+            <p>说得简单些——<br/>
+            那是我最快乐的一瞬间。</p>
 
-  <p>说得简单些——<br/>
-  那是我最快乐的一瞬间。</p>
+            <p>之后的日子里，我们每天视频、聊天、问候。<br/>
+            慢慢地了解彼此，慢慢地认识彼此。</p>
 
-  <p>之后的日子里，我们每天视频、聊天、问候。<br/>
-  慢慢地了解彼此，慢慢地认识彼此。</p>
+            <p>我听过你的过去，你的经历。<br/>
+            你也听过我的故事，我的成长。</p>
 
-  <p>我听过你的过去，你的经历。<br/>
-  你也听过我的故事，我的成长。</p>
+            <p>谢谢你的真诚、热情与包容。<br/>
+            谢谢你的情绪稳定和温柔坚定。</p>
 
-  <p>谢谢你的真诚、热情与包容。<br/>
-  谢谢你的情绪稳定和温柔坚定。</p>
+            <p>我常常在想，我该如何回报。<br/>
+            也许我给不了你全世界的温柔，<br/>
+            给不了你天上的星星和月亮，<br/>
+            但我会尽我所能，在我能触及的范围里，把最好的一切都给你。</p>
 
-  <p>我常常在想，我该如何回报。<br/>
-  也许我给不了你全世界的温柔，<br/>
-  给不了你天上的星星和月亮，<br/>
-  但我会尽我所能，在我能触及的范围里，把最好的一切都给你。</p>
+            <p>你说你也喜欢《绿皮书》。<br/>
+            你喜欢雪利博士的优雅。<br/>
+            而我，更喜欢托尼。</p>
 
-  <p>你说你也喜欢《绿皮书》。<br/>
-  你喜欢雪利博士的优雅。<br/>
-  而我，更喜欢托尼。</p>
+            <p>喜欢他对妻子的守约与忠诚，<br/>
+            对博士的袒护、照顾与担当。</p>
 
-  <p>喜欢他对妻子的守约与忠诚，<br/>
-  对博士的袒护、照顾与担当。</p>
+            <p>博士教托尼写信。<br/>
+            托尼笨拙地学着表达爱意。</p>
 
-  <p>博士教托尼写信。<br/>
-  托尼笨拙地学着表达爱意。</p>
+            <p>也是因为这部电影，<br/>
+            让我觉得写信是一件很浪漫的事情。<br/>
+            让我相信，文字可以承载深情。</p>
 
-  <p>也是因为这部电影，<br/>
-  让我觉得写信是一件很浪漫的事情。<br/>
-  让我相信，文字可以承载深情。</p>
+            <p>我想成为托尼。<br/>
+            因为你像博士一样优雅，<br/>
+            教会我如何把笨拙变成真诚。<br/>
+            你也像托尼的妻子那样温柔，<br/>
+            总愿意原谅我的幼稚。</p>
 
-  <p>我想成为托尼。<br/>
-  因为你像博士一样优雅，<br/>
-  教会我如何把笨拙变成真诚。<br/>
-  你也像托尼的妻子那样温柔，<br/>
-  总愿意原谅我的幼稚。</p>
+            <p>“树叶一片片地飘落，<br/>
+            颜色渐渐变灰、变棕。<br/>
+            我看见无数银装素裹的树，<br/>
+            像从童话故事里走出来。<br/>
+            我会数着时间，<br/>
+            每一时，每一分，每一秒，<br/>
+            直到拥你入怀。”</p>
 
-  <p>“树叶一片片地飘落，<br/>
-  颜色渐渐变灰、变棕。<br/>
-  我看见无数银装素裹的树，<br/>
-  像从童话故事里走出来。<br/>
-  我会数着时间，<br/>
-  每一时，每一分，每一秒，<br/>
-  直到拥你入怀。”</p>
+            <p>读到这段话时，我想到的不是电影。<br/>
+            是我们。</p>
 
-  <p>读到这段话时，我想到的不是电影。<br/>
-  是我们。</p>
+            <p>想到我们等待下次相见的日子，<br/>
+            想到那种既平静又汹涌的期待，<br/>
+            想到重逢那一刻，不必言语的相拥。</p>
 
-  <p>想到我们等待下次相见的日子，<br/>
-  想到那种既平静又汹涌的期待，<br/>
-  想到重逢那一刻，不必言语的相拥。</p>
+            <p>还是想认真地谢谢你。<br/>
+            谢谢你在我突然出现的时候，<br/>
+            愿意为我腾出整整一段时间。<br/>
+            尤其是在你工作那么繁忙、那么重要的阶段。<br/>
+            这份陪伴，比任何奢华都珍贵。<br/>
+            在那几天里，<br/>
+            我真切地觉得——<br/>
+            自己是这个世界上最富有的人。</p>
 
-  <p>还是想认真地谢谢你。<br/>
-  谢谢你在我突然出现的时候，<br/>
-  愿意为我腾出整整一段时间。<br/>
-  尤其是在你工作那么繁忙、那么重要的阶段。<br/>
-  这份陪伴，比任何奢华都珍贵。<br/>
-  在那几天里，<br/>
-  我真切地觉得——<br/>
-  自己是这个世界上最富有的人。</p>
+            <p>我们都生活在这个浮躁、碎片化的时代。<br/>
+            生活有时推着我们向前，<br/>
+            快得来不及思考。<br/>
+            可对于感情，我更愿意慢下来。</p>
 
-  <p>我们都生活在这个浮躁、碎片化的时代。<br/>
-  生活有时推着我们向前，<br/>
-  快得来不及思考。<br/>
-  可对于感情，我更愿意慢下来。</p>
+            <p>静下来，<br/>
+            回忆我们的一点一滴，<br/>
+            让它变成文字，<br/>
+            留存在时间里。<br/>
+            变成书信。</p>
 
-  <p>静下来，<br/>
-  回忆我们的一点一滴，<br/>
-  让它变成文字，<br/>
-  留存在时间里。<br/>
-  变成书信。</p>
+            <p>从前车马很慢，书信很远，<br/>
+            一生只够爱一个人。</p>
 
-  <p>从前车马很慢，书信很远，<br/>
-  一生只够爱一个人。</p>
+            <p>所以我想慢慢爱你。<br/>
+            不急着证明，不急着许诺。<br/>
+            在每一次相见里认真拥抱，<br/>
+            在每一次分别后认真思念。</p>
 
-  <p>所以我想慢慢爱你。<br/>
-  不急着证明，不急着许诺。<br/>
-  在每一次相见里认真拥抱，<br/>
-  在每一次分别后认真思念。</p>
+            <p>如果未来真的走向婚姻，<br/>
+            那一定是因为在时间里反复确认——<br/>
+            是你。</p>
 
-  <p>如果未来真的走向婚姻，<br/>
-  那一定是因为在时间里反复确认——<br/>
-  是你。</p>
+            <p>“遇见你之前，我没想过结婚；<br/>
+            遇见你之后，结婚我没想过别人。”</p>
 
-  <p>“遇见你之前，我没想过结婚；<br/>
-  遇见你之后，结婚我没想过别人。”</p>
+            <p>但比起说一辈子这样宏大的话，<br/>
+            我更愿意去想一些具体的画面。</p>
 
-  <p>但比起说一辈子这样宏大的话，<br/>
-  我更愿意去想一些具体的画面。</p>
+            <p>比如某个普通的清晨，<br/>
+            你还在半睡半醒之间，<br/>
+            我在厨房忙着，<br/>
+            窗外的光刚好落进来。</p>
 
-  <p>比如某个普通的清晨，<br/>
-  你还在半睡半醒之间，<br/>
-  我在厨房忙着，<br/>
-  窗外的光刚好落进来。</p>
+            <p>比如冬天的晚上，<br/>
+            我们一起去超市买菜，<br/>
+            为晚饭讨论很久，<br/>
+            最后却还是点了外卖。</p>
 
-  <p>比如冬天的晚上，<br/>
-  我们一起去超市买菜，<br/>
-  为晚饭讨论很久，<br/>
-  最后却还是点了外卖。</p>
+            <p>比如周末没有安排的下午，<br/>
+            各自做各自的事情，<br/>
+            偶尔抬头看看对方，<br/>
+            确认那个人就在身边。</p>
 
-  <p>比如周末没有安排的下午，<br/>
-  各自做各自的事情，<br/>
-  偶尔抬头看看对方，<br/>
-  确认那个人就在身边。</p>
+            <p>这些看起来平常的小事，<br/>
+            对我来说，比盛大的誓言更重要。</p>
 
-  <p>这些看起来平常的小事，<br/>
-  对我来说，比盛大的誓言更重要。</p>
+            <p>如果未来真的要走得更远，<br/>
+            我希望它不是轰轰烈烈的开始，<br/>
+            而是日复一日的陪伴。<br/>
+            不是突然决定，<br/>
+            而是在时间里慢慢发现——<br/>
+            原来我们一起生活，<br/>
+            很自然，也很安心。</p>
 
-  <p>如果未来真的要走得更远，<br/>
-  我希望它不是轰轰烈烈的开始，<br/>
-  而是日复一日的陪伴。<br/>
-  不是突然决定，<br/>
-  而是在时间里慢慢发现——<br/>
-  原来我们一起生活，<br/>
-  很自然，也很安心。</p>
+            <p>如果有一天我们并肩站在阳光下，<br/>
+            那或许不是因为我们说过多少承诺，<br/>
+            而是因为在无数个普通的日子里，<br/>
+            我们都没有离开。<br/>
+            那样，就很好了。</p>
 
-  <p>如果有一天我们并肩站在阳光下，<br/>
-  那或许不是因为我们说过多少承诺，<br/>
-  而是因为在无数个普通的日子里，<br/>
-  我们都没有离开。<br/>
-  那样，就很好了。</p>
+            <p>不知不觉，写了这么多。<br/>
+            纸短情长，字里行间不过是想说一句——</p>
 
-  <p>不知不觉，写了这么多。<br/>
-  纸短情长，字里行间不过是想说一句——</p>
+            <p>愿岁月温柔，<br/>
+            愿我们安好。</p>
 
-  <p>愿岁月温柔，<br/>
-  愿我们安好。</p>
+            <p>以后，也请多指教。</p>
 
-  <p>以后，也请多指教。</p>
-
-  <div class="signature">
-    <div>
-      <div>—— <span class="sig-name">祝俊辉</span></div>
-      <div style="opacity:.85;margin-top:6px" id="signedDate"></div>
-    </div>
-    <div style="opacity:.75">❤</div>
-  </div>
-
-</section>
-
+            <div class="signature">
+              <div>
+                <div>—— <span class="sig-name">祝俊辉</span></div>
+                <div style="opacity:.85;margin-top:6px" id="signedDate"></div>
+              </div>
+              <div style="opacity:.75">❤</div>
+            </div>
+          </section>
 
           <div class="actions">
             <span class="audio-pill" id="audioStatus">🎵 <b>音乐</b>：准备播放…</span>
             <button class="primary" id="playMusic">播放音乐</button>
             <button id="toggleHearts">开启/关闭飘落爱心</button>
             <button id="copyText">复制文字</button>
+            <button id="print">打印 / 保存为PDF</button>
           </div>
         </main>
       </article>
@@ -745,7 +737,8 @@
       const d = pad(now.getDate());
       const hh = pad(now.getHours());
       const mm = pad(now.getMinutes());
-      document.getElementById('signedDate').textContent = `${y}-${m}-${d}  ${hh}:${mm}`;
+      const el = document.getElementById('signedDate');
+      if (el) el.textContent = `${y}-${m}-${d}  ${hh}:${mm}`;
     })();
 
     // ===== Photo polaroid handwritten date =====
@@ -800,58 +793,72 @@
       [...heartsWrap.children].forEach((c,i)=> setTimeout(()=>c.remove(), i*40));
     }
     startHearts();
-    document.getElementById('toggleHearts').addEventListener('click', () => {
-      heartsOn = !heartsOn;
-      heartsOn ? startHearts() : stopHearts();
-    });
+    const toggleHeartsBtn = document.getElementById('toggleHearts');
+    if (toggleHeartsBtn){
+      toggleHeartsBtn.addEventListener('click', () => {
+        heartsOn = !heartsOn;
+        heartsOn ? startHearts() : stopHearts();
+      });
+    }
 
     // ===== Copy & Print =====
-    document.getElementById('copyText').addEventListener('click', async () => {
-      const text = document.getElementById('letter').innerText.trim();
-      try{
-        await navigator.clipboard.writeText(text);
-        alert('已复制到剪贴板。');
-      }catch(e){
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        ta.remove();
-        alert('已复制到剪贴板。');
-      }
-    });
-    document.getElementById('print').addEventListener('click', () => window.print());
+    const copyBtn = document.getElementById('copyText');
+    if (copyBtn){
+      copyBtn.addEventListener('click', async () => {
+        const text = document.getElementById('letter')?.innerText?.trim() || '';
+        try{
+          await navigator.clipboard.writeText(text);
+          alert('已复制到剪贴板。');
+        }catch(e){
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+          alert('已复制到剪贴板。');
+        }
+      });
+    }
+
+    const printBtn = document.getElementById('print');
+    if (printBtn) printBtn.addEventListener('click', () => window.print());
 
     // ===== Music =====
     const bgm = document.getElementById('bgm');
     const playBtn = document.getElementById('playMusic');
     const audioStatus = document.getElementById('audioStatus');
 
-    function setAudioStatus(text){ audioStatus.textContent = text; }
+    function setAudioStatus(text){
+      if (audioStatus) audioStatus.textContent = text;
+    }
 
     async function tryPlayMusic(){
+      if (!bgm) return;
       try{
         await bgm.play();
         setAudioStatus('🎵 音乐：正在播放');
-        playBtn.textContent = '暂停音乐';
+        if (playBtn) playBtn.textContent = '暂停音乐';
       }catch(err){
         setAudioStatus('🎵 音乐：需要点一下“播放音乐”');
-        playBtn.textContent = '播放音乐';
+        if (playBtn) playBtn.textContent = '播放音乐';
       }
     }
 
-    playBtn.addEventListener('click', async () => {
-      if (!bgm.paused){
-        bgm.pause();
-        setAudioStatus('🎵 音乐：已暂停');
-        playBtn.textContent = '播放音乐';
-        return;
-      }
-      await tryPlayMusic();
-    });
+    if (playBtn){
+      playBtn.addEventListener('click', async () => {
+        if (!bgm) return;
+        if (!bgm.paused){
+          bgm.pause();
+          setAudioStatus('🎵 音乐：已暂停');
+          playBtn.textContent = '播放音乐';
+          return;
+        }
+        await tryPlayMusic();
+      });
+    }
 
-    // iOS/Chrome policy: user gesture needed. We'll try on first user interaction.
+    // user gesture for autoplay policies
     function armFirstGesture(){
       const handler = () => {
         tryPlayMusic();
@@ -874,31 +881,30 @@
       if (opened) return;
       opened = true;
 
-      // start music attempt (gesture)
+      // music attempt on gesture
       tryPlayMusic();
 
-      envelope.classList.add('open');
+      envelope?.classList.add('open');
 
-      // after animation, reveal the letter card
       setTimeout(() => {
-        card.classList.add('show');
-        hint.style.opacity = 0;
-        hint.style.transform = 'translateY(-6px)';
-        hint.style.transition = 'opacity 500ms ease, transform 500ms ease';
-        // scroll to card on small screens
-        card.scrollIntoView({ behavior:'smooth', block:'start' });
+        card?.classList.add('show');
+        if (hint){
+          hint.style.opacity = 0;
+          hint.style.transform = 'translateY(-6px)';
+          hint.style.transition = 'opacity 500ms ease, transform 500ms ease';
+        }
+        card?.scrollIntoView({ behavior:'smooth', block:'start' });
       }, 900);
     }
 
-    envelopeWrap.addEventListener('click', openEnvelope);
-    envelopeWrap.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') openEnvelope();
-    });
+    if (envelopeWrap){
+      envelopeWrap.addEventListener('click', openEnvelope);
+      envelopeWrap.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') openEnvelope();
+      });
+      // 移动端更稳：也监听 touchstart
+      envelopeWrap.addEventListener('touchstart', openEnvelope, { passive:true });
+    }
   </script>
 </body>
 </html>
-
-
-
-
-
